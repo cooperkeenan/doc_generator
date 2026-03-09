@@ -1,4 +1,4 @@
-const GITHUB_CLIENT_ID = 'your_github_client_id';
+const GITHUB_CLIENT_ID = 'Ov23liff91VGCpUNWcXc';
 const REDIRECT_URI = 'http://localhost:5173';
 
 export default function GitHubAuth() {
