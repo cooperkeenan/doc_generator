@@ -1,3 +1,6 @@
+import React from 'react';
+import MermaidDiagram from './MermaidDiagram';
+
 export default function DiagramViewer({ analysis, onBack }) {
   return (
     <div>
@@ -16,31 +19,53 @@ export default function DiagramViewer({ analysis, onBack }) {
         </ul>
       </div>
 
-      <div style={{ marginTop: '2rem' }}>
-        <h3>Files Analyzed</h3>
-        {Object.entries(analysis.analysis.files).map(([filepath, data]) => (
-          <details key={filepath} style={{ marginBottom: '1rem' }}>
-            <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>
-              {filepath}
-            </summary>
-            <pre style={{ 
-              background: '#f5f5f5', 
-              padding: '1rem', 
-              overflow: 'auto',
-              fontSize: '0.85rem'
-            }}>
-              {JSON.stringify(data, null, 2)}
-            </pre>
-          </details>
-        ))}
-      </div>
+      {/* Mermaid Diagrams */}
+      {analysis.diagrams && (
+        <>
+          <MermaidDiagram 
+            chart={analysis.diagrams.architecture}
+            title="Architecture Overview"
+          />
+          
+          <MermaidDiagram 
+            chart={analysis.diagrams.dependencies}
+            title="Dependency Graph"
+          />
+        </>
+      )}
 
-      <div style={{ marginTop: '2rem' }}>
-        <h3>Dependency Graph</h3>
-        <pre style={{ background: '#f5f5f5', padding: '1rem', overflow: 'auto' }}>
-          {JSON.stringify(analysis.analysis.dependency_graph, null, 2)}
-        </pre>
-      </div>
+      {/* Raw Data (collapsible) */}
+      <details style={{ marginTop: '3rem' }}>
+        <summary style={{ cursor: 'pointer', fontWeight: 'bold', fontSize: '1.2rem' }}>
+          📊 View Raw Analysis Data
+        </summary>
+        
+        <div style={{ marginTop: '2rem' }}>
+          <h3>Files Analyzed</h3>
+          {Object.entries(analysis.analysis.files).map(([filepath, data]) => (
+            <details key={filepath} style={{ marginBottom: '1rem' }}>
+              <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>
+                {filepath}
+              </summary>
+              <pre style={{ 
+                background: '#f5f5f5', 
+                padding: '1rem', 
+                overflow: 'auto',
+                fontSize: '0.85rem'
+              }}>
+                {JSON.stringify(data, null, 2)}
+              </pre>
+            </details>
+          ))}
+        </div>
+
+        <div style={{ marginTop: '2rem' }}>
+          <h3>Dependency Graph (JSON)</h3>
+          <pre style={{ background: '#f5f5f5', padding: '1rem', overflow: 'auto' }}>
+            {JSON.stringify(analysis.analysis.dependency_graph, null, 2)}
+          </pre>
+        </div>
+      </details>
     </div>
   );
 }

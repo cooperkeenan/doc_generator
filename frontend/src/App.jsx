@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';  
 import GitHubAuth from './GitHubAuth';
 import RepoSelector from './RepoSelector';
 import DiagramViewer from './DiagramViewer';
@@ -39,7 +39,7 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           repo_owner: repo.owner,
-          repo_name: repo.name,
+          repo_name: repo.full_name,
           access_token: accessToken
         })
       });

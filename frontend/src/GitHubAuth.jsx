@@ -1,3 +1,5 @@
+import React from 'react';  
+
 const GITHUB_CLIENT_ID = 'Ov23liff91VGCpUNWcXc';
 const REDIRECT_URI = 'http://localhost:5173';
 
@@ -24,7 +26,7 @@ export default function GitHubAuth() {
           marginTop: '2rem'
         }}
       >
-        🔗 Connect with GitHub
+        Connect with GitHub
       </button>
     </div>
   );

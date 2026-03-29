@@ -24,7 +24,7 @@ def parse_repository(files: Dict[str, str]) -> Dict:
     
     return analysis
 
-def parse_python_file(content: str, filepath: str) -> Dict:
+def parse_file(content: str, filepath: str) -> Dict:
     """Parse a single Python file using AST"""
     try:
         tree = ast.parse(content)
